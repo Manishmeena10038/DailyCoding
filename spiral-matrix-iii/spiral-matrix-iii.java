@@ -1,17 +1,49 @@
 class Solution {
-  public int[][] spiralMatrixIII(int rows, int cols, int rStart, int cStart) {
-    final int[] dx = {1, 0, -1, 0};
-    final int[] dy = {0, 1, 0, -1};
-    List<int[]> ans = new ArrayList<>(Arrays.asList(new int[] {rStart, cStart}));
+    public int[][] spiralMatrixIII(int rows, int cols, int rStart, int cStart) {
+        int count=0,ci=1,ri=1,rd=2,cd=2,a=rStart,b=cStart;
+        int[][] ans = new int[rows*cols][2];
+        ans[count][0]=rStart;
+        ans[count][1]=cStart;
+        count++;
+        while(count<rows*cols){
+            for(int i =0;i<ci;i++){
+                b++;
+                if(a>-1&&b>-1&&a<rows&&b<cols){
+                ans[count][0]=a;
+                ans[count][1]=b;
+                count++;
+                }
+            }
+            ci+=2;
+            for(int i =0;i<ri;i++){
+                a++;
+                if(a>-1&&b>-1&&a<rows&&b<cols){
+                    ans[count][0]=a;
+                ans[count][1]=b;
+                count++;
+                }
+            }
+            ri+=2;
+            for(int i =0;i<cd;i++){
+                b--;
+                if(a>-1&&b>-1&&a<rows&&b<cols){
+               ans[count][0]=a;
+                ans[count][1]=b;
+                count++;
+                }
+            }
+            cd+=2;
+            for(int i =0;i<rd;i++){
+                a--;
+                if(a>-1&&b>-1&&a<rows&&b<cols){
+                    ans[count][0]=a;
+                ans[count][1]=b;
+                count++;
+                }
+            }
+            rd+=2;
+        }
+        return ans;
 
-    for (int i = 0; ans.size() < rows * cols; ++i)
-      for (int step = 0; step < i / 2 + 1; ++step) {
-        rStart += dy[i % 4];
-        cStart += dx[i % 4];
-        if (0 <= rStart && rStart < rows && 0 <= cStart && cStart < cols)
-          ans.add(new int[] {rStart, cStart});
-      }
-
-    return ans.stream().toArray(int[][] ::new);
-  }
+    }
 }
