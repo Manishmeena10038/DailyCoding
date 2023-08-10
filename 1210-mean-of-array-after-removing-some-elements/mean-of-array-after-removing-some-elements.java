@@ -1,16 +1,26 @@
 class Solution {
     public double trimMean(int[] arr) {
-        int n = arr.length;
-        int m = (n*5)/100;
-        int l = n-2*m;
-        double s =0;
+        int m = (arr.length*5)/100;
+        int l = arr.length-2*m;
         Arrays.sort(arr);
-        double sum =0;
+        int sum =0;
         for(int i=m;i<arr.length-m;i++){
-            sum+=arr[i];
-            s++;
+            sum+=arr[i];     
         }
-       double avg = sum/s;
-        return avg;      
+        return (double)sum/l;      
     }
 }
+// class Solution {
+//     public double trimMean(int[] arr) {    
+//         Arrays.sort(arr);
+//         int n=arr.length*5/100;
+//         int sum=0;
+//         int count=0;
+//         for(int i=n;i<arr.length-n;i++)
+//         {
+//             sum+=arr[i];
+//             count++;
+//         }
+//         return (double)sum/count;
+//     }
+// }
