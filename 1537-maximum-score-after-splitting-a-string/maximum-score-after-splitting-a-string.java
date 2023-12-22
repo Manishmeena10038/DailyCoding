@@ -2,14 +2,14 @@ class Solution {
     public int maxScore(String s) {
         int maxi=0;
         int k = s.length();
-        if(k==1) return 1;
-        if(k==2){
-            if(s.charAt(0)==s.charAt(1)) return 1;
-            else{
-                if(s.charAt(0)=='0') return 2;
-                if(s.charAt(0)=='1') return 0;
-            }
-        }
+        // if(k==1) return 1;
+        // if(k==2){
+        //     if(s.charAt(0)==s.charAt(1)) return 1;
+        //     else{
+        //         if(s.charAt(0)=='0') return 2;
+        //         if(s.charAt(0)=='1') return 0;
+        //     }
+        // }
        for(int i=0;i<k-1;i++){
            int l = zero(s.substring(0,i+1));
            int m = one(s.substring((i+1),k));
