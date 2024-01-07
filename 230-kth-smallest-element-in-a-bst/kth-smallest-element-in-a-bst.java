@@ -57,24 +57,26 @@
 class Solution {
 
     public int kthSmallest(TreeNode root, int k) {
-        int[] ans = new int[1];  // Use an array to pass by reference
-        int[] cnt = new int[1];  // Counter array to keep track of the current count
-        ret(root, ans, k, cnt);
-        return ans[0];
+        int[] result = new int[1];
+        int[] count = new int[1];
+        count[0] = 0;
+        ret(root, result, k, count);
+        return result[0];
     }
 
-    public void ret(TreeNode root, int[] ans, int k, int[] cnt) {
-        if (root == null)
-            return;
-        
-        ret(root.left, ans, k, cnt);
-        cnt[0]++;
-        
-        if (k == cnt[0]) {
-            ans[0] = root.val;
+    public void ret(TreeNode root, int[] result, int k, int[] count) {
+        if (root == null || count[0] >= k) {
             return;
         }
-        
-        ret(root.right, ans, k, cnt);
+
+        ret(root.left, result, k, count);
+
+        count[0]++;
+        if (count[0] == k) {
+            result[0] = root.val;
+            return;
+        }
+
+        ret(root.right, result, k, count);
     }
 }
