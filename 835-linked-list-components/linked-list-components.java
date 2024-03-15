@@ -12,28 +12,45 @@
 class Solution {
     public int numComponents(ListNode head, int[] nums) {
        int cnt=0;
+       int size = 0;
+       ListNode c = head;
+       
        if(head==null)return 0;
-        while(head!=null){
+        while(c!=null){
             
-            if(search(head.val,nums)){
+           
+            size++;
+            c=c.next;
+        }
+        int[] arr  = new int[size+1];
+        ListNode n = head;
+        for(int r:nums){
+          arr[r]++;
+        //   n =n.next;
+        }
+        while(head!=null){
+             if(arr[head.val]==1){
                 cnt++;
                 if(head.next!=null)
-                if(search(head.next.val,nums)){
+                if(arr[head.next.val]==1){
                     // head=head.next;
                     cnt--;
                 }
             }
-            
             head=head.next;
         }
         return cnt;
+            //         if(search(head.val,nums)){
+            //     cnt++;
+            //     if(head.next!=null)
+            //     if(search(head.next.val,nums)){
+            //         // head=head.next;
+            //         cnt--;
+            //     }
+            // }
+            
+            // head=head.next;
+
     }
-    static boolean search(int n,int[] nums){
-        for(int i=0;i<nums.length;i++){
-            if(nums[i]==n){
-                return true;
-            }
-        }
-        return false;
-    }
+    
 }
