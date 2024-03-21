@@ -37,14 +37,14 @@ class Solution {
         for(int i=heights.length-1;i>=0;i--){
             count=0;
             while(!stk.isEmpty()&&stk.peek()<heights[i]){
-                count++;
+                arr[i]++;
                 stk.pop();
             }
             if(!stk.isEmpty()){
-                count++;
+                arr[i]++;
             }
             stk.push(heights[i]);
-            arr[i] = count;
+            // arr[i] = count;
         }
         return arr;
     }
