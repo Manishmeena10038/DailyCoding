@@ -31,21 +31,22 @@ class Solution {
         // return arr;
 
 
-        int[] arr = new int[heights.length];
         Stack<Integer> stk = new Stack<>();
         int count =0;
         for(int i=heights.length-1;i>=0;i--){
+            int l = heights[i];
             count=0;
             while(!stk.isEmpty()&&stk.peek()<heights[i]){
-                arr[i]++;
+                count++;
                 stk.pop();
             }
             if(!stk.isEmpty()){
-                arr[i]++;
+                count++;
             }
-            stk.push(heights[i]);
+            stk.push(l);
+            heights[i]=count;
             // arr[i] = count;
         }
-        return arr;
+        return heights;
     }
 }
