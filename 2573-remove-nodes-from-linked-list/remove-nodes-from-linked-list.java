@@ -28,5 +28,28 @@ class Solution {
         }
         head= temp;
         return temp;
-    }
+//         ListNode pre = null;
+// ListNode cur = head;
+// while (cur != null) {
+//     ListNode nxt = cur.next;
+//     cur.next = pre;
+//     pre = cur;
+//     cur = nxt;
+// }
+// head = pre;
+
+// // Now, traverse the reversed list and remove nodes whose value is less than the value of the next node
+// ListNode dummy = new ListNode(0); // Create a dummy node to handle the case where the head needs to be removed
+// dummy.next = head;
+// ListNode prev = dummy;
+// while (head != null && head.next != null) {
+//     if (head.val < head.next.val) {
+//         head.next = prev.next; 
+//     } else {
+//         prev = head;
+//     }
+//     head = head.next;
+// }
+// return dummy.next;
+}
 }
