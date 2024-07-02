@@ -1,17 +1,20 @@
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
-        int[] ar = new int[1001];
-        int n = nums1.length,m=nums2.length;
-        int in = Math.max(n,m);
-        int[]  ans =  new int[in];
+        int n = nums1.length;
+        int m = nums2.length;
+        int nm = Math.min(n,m);
+
+        int[] ans = new int[nm];
+        int[] use = new int[1001];
         for(int i:nums1){
-            ar[i]++;
+            use[i]++;
+
         }
-        in=0;
+        int in = 0;
         for(int i:nums2){
-            if(ar[i]>0){
-                ar[i]--;
-                ans[in++]=i;
+            if(use[i]>0){
+                use[i]--;
+            ans[in++]=i;
             }
         }
         return Arrays.copyOf(ans,in);
