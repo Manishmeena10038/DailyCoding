@@ -5,38 +5,36 @@ class Solution {
         int i =0;
         int ones = 0;
         int one = 0;
+        int  rightone = 0;
         int k=0;
         HashMap<Integer,Integer> map = new HashMap<>();
 
         for(int j:nums){
-            if(j==1){
-                one++;
+                if(j==1)
                 ones++;
             }
-            map.put(k,one);
-            k++;
-        }
-        for(int j:nums){
-            if(j==1){
-                one++;
-                
+        while(i<ones){
+            if(nums[i]==1){
+                rightone++;
             }
-            map.put(k,one);
-            k++;
+            i++;
+        }
+        int leftone=0;
+        
+        while(i<2*nums.length){
+            int curone = rightone-leftone;
+            maxone = Math.max(curone,maxone);
+            if(nums[i%nums.length]==1){
+                rightone++;
+            }
+            if(nums[(i-ones)%nums.length]==1){
+                leftone++;
+            }
+            
+            i++;
         }
 
         
-       
-
-        int left = 0;
-        int right = ones;
-        while(right<k){
-            int curone = map.get(right)-map.get(left);
-            maxone = Math.max(maxone,curone);
-            right++;
-            left++;
-
-        }
         return ones-maxone;
         
     }
