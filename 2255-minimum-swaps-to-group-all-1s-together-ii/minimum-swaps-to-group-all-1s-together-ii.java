@@ -6,9 +6,8 @@ class Solution {
         int ones = 0;
         int one = 0;
         int  rightone = 0;
-        int k=0;
-        HashMap<Integer,Integer> map = new HashMap<>();
-
+        int leftone=0;
+        
         for(int j:nums){
                 if(j==1)
                 ones++;
@@ -19,8 +18,6 @@ class Solution {
             }
             i++;
         }
-        int leftone=0;
-        
         while(i<2*nums.length){
             int curone = rightone-leftone;
             maxone = Math.max(curone,maxone);
