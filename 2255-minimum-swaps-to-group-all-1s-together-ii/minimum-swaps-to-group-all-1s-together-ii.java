@@ -1,38 +1,19 @@
 class Solution {
     public int minSwaps(int[] nums) {
-        // int arr[] = new int[2*nums.length];
-        int maxone=0;
-        int i =0;
-        int ones = 0;
-        int one = 0;
-        int  rightone = 0;
-        int leftone=0;
-        
+        int maxone=0,ones = 0,cnt = 0;
+
         for(int j:nums){
-                if(j==1)
-                ones++;
-            }
-        while(i<ones){
-            if(nums[i]==1){
-                rightone++;
-            }
-            i++;
-        }
-        while(i<2*nums.length){
-            int curone = rightone-leftone;
-            maxone = Math.max(curone,maxone);
-            if(nums[i%nums.length]==1){
-                rightone++;
-            }
-            if(nums[(i-ones)%nums.length]==1){
-                leftone++;
-            }
-            
-            i++;
+            ones+=j;
         }
 
+        for(int i=0;i<2*nums.length;i++){
+            cnt+=nums[i%nums.length];
+            if(i>ones-1){
+                cnt-=nums[(i-ones)%nums.length];
+            }
+            maxone = Math.max(maxone,cnt);
+        }
         
-        return ones-maxone;
-        
+        return ones-maxone; 
     }
 }
