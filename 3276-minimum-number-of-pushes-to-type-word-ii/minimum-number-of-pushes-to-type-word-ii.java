@@ -12,9 +12,8 @@ class Solution {
         int ans = 0;
         int cnt = 1;
 
-
-
-        for(int i=25;i>=0;i--){
+        int i  =25;
+        while(i>=0&&arr[i]!=0){
             diguse++;
             if(diguse<=8){
                 ans+=(arr[i]*cnt);
@@ -23,6 +22,7 @@ class Solution {
                 cnt++;
                 }
             }
+            i--;
            
         }
         return ans;
