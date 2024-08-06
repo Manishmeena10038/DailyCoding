@@ -15,12 +15,11 @@ class Solution {
         int i  =25;
         while(i>=0&&arr[i]!=0){
             diguse++;
-            if(diguse<=8){
-                ans+=(arr[i]*cnt);
-                if(diguse==8){
+            ans+=(arr[i]*cnt);
+
+            if(diguse==8){
                 diguse=0;
                 cnt++;
-                }
             }
             i--;
            
