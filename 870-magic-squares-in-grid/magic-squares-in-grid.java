@@ -1,49 +1,47 @@
 class Solution {
-    int ans=0;
     public int numMagicSquaresInside(int[][] grid) {
-        int  n=grid.length;
-        int m=grid[0].length;
-
-        if(n<3 || m<3)
-         return 0;
-        
-        for(int i=0;i<=n-3;i++)
-         for(int j=0;j<=n-3;j++)
-          help(i,j,grid);
-        
-        return ans;
-    }
-    public void help(int x,int y,int mat[][])
-    {
-       int sum[]=new int[3];
-       int sumcol[]=new int[3];
-       boolean[] arr=new boolean[10];
-
-       for(int i=0;i<3;i++)
-        for(int j=0;j<3;j++)
-        {
-            //row sum
-            sum[i]+=mat[x+i][y+j];
-            //column sum
-            sumcol[j]+=mat[x+i][y+j];
-            
-            //Must have valus between 1 to 9 and must be unique
-            if(mat[x+i][y+j]>9 || mat[x+i][y+j]==0 || arr[mat[x+i][y+j]]==true)
-             return;
-            arr[mat[x+i][y+j]]=true;
+        int ans=0;
+        for(int i=0;i<=grid.length-3;i++){
+            for(int j=0;j<=grid[0].length-3;j++){
+                if(dis(grid,i,j)&&sum(grid,i,j)){
+                    ans++;
+                }
+            }
         }
-       
-       //Row sum must be equal to Column sum
-       for(int i=1;i<3;i++)
-         if(sum[i]!=sum[i-1] || sum[i]!=sumcol[i] || sumcol[i]!=sumcol[i-1])
-            return;
-       
-       int dig=mat[x][y]+mat[x+1][y+1]+mat[x+2][y+2];
-       
-       //Diagonals sum must be equal and equal to any of the row or sum
-       if(dig!=(mat[x][y+2]+mat[x+1][y+1]+mat[x+2][y]) || dig!=sum[0])
-        return;
-       
-       ans++;
+        return ans;
+
+    }
+    public static boolean dis(int[][] grid, int i,int j){
+        int arr[] = new int[10];
+        for(int k=i;k<i+3;k++){
+            for(int l=j;l<j+3;l++){
+                if(grid[k][l]==0||grid[k][l]>9){
+                    return false;
+                }
+                else{
+                    arr[grid[k][l]]++;
+                    if(arr[grid[k][l]]>1)return false;
+                }
+            }
+        }
+        return true;
+    }
+    public static boolean sum(int[][] grid, int i,int j){
+        
+        int sumd1 = grid[i][j]+grid[i+1][j+1]+grid[i+2][j+2];
+        int sumd2 = grid[i][j+2]+grid[i+1][j+1]+grid[i+2][j];
+        int sumr1 = grid[i][j]+grid[i][j+1]+grid[i][j+2];
+        int sumr2 = grid[i+1][j]+grid[i+1][j+1]+grid[i+1][j+2];
+        int sumr3 = grid[i+2][j]+grid[i+2][j+1]+grid[i+2][j+2];
+
+        int sumc1 = grid[i][j]+grid[i+1][j]+grid[i+2][j];
+        int sumc2 = grid[i][j+1]+grid[i+1][j+1]+grid[i+2][j+1];
+        int sumc3 = grid[i][j+2]+grid[i+1][j+2]+grid[i+2][j+2];
+
+        if(sumr1!=sumr2||sumr2!=sumr3||sumr3!=sumd1||sumd1!=sumd2||sumd2!=sumc1||sumc1!=sumc2||sumc2!=sumc3){
+            return false;
+        }
+        return true;
+
     }
 }
