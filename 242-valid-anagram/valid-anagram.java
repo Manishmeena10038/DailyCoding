@@ -1,19 +1,19 @@
 class Solution {
-  public boolean isAnagram(String s, String t) {
-    if (s.length() != t.length())
-      return false;
+    public boolean isAnagram(String s, String t) {
 
-    int[] count = new int[26];
+       if(s.length()!=t.length())return false;
 
-    for (final char c : s.toCharArray())
-      ++count[c - 'a'];
+       int arr[] = new int[26];
 
-    for (final char c : t.toCharArray()) {
-      if (count[c - 'a'] == 0)
-        return false;
-      --count[c - 'a'];
+       for(char c:s.toCharArray()){
+        arr[c-'a']++;
+       }
+       for(char c:t.toCharArray()){
+        int i = c-'a';
+        if(arr[i]==0)return false;
+        arr[i]--;
+       }
+       return true;
+
     }
-
-    return true;
-  }
 }
