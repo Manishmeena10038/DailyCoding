@@ -1,79 +1,32 @@
+import java.util.Arrays;
+
 class Solution {
-
-    public long countFairPairs(int[] nums, int lower, int upper) {
-        Arrays.sort(nums);
-        return count(nums, upper) - count(nums, lower - 1);
-    }
-
-    private long count(int[] nums, int limit) {
-        long result = 0;
-
-        for(int low = 0, high = nums.length - 1; low < high; low++) {
-            while(low < high && (nums[low] + nums[high] > limit)) high--;
-
-            result += (high - low);
+    public long countFairPairs(int[] v, int lower, int upper) {
+        Arrays.sort(v);
+        long ans = 0;
+        for (int i = 0; i < v.length - 1; i++) {
+            int low = lowerBound(v, i + 1, v.length, lower - v[i]);
+            int up = upperBound(v, i + 1, v.length, upper - v[i]);
+            ans += up - low;
         }
-
-        return result;
+        return ans;
+    }
+  
+    private int lowerBound(int[] v, int start, int end, int target) {
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            if (v[mid] >= target) end = mid;
+            else start = mid + 1;
+        }
+        return start;
     }
 
+    private int upperBound(int[] v, int start, int end, int target) {
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            if (v[mid] > target) end = mid;
+            else start = mid + 1;
+        }
+        return start;
+    }
 }
-
-/*
-
-
-Consider this is the array :-
- ___________________________________________________________
-|    |    |    |    |    |    |    |    |    |    |    |    | 
- -----------------------------------------------------------
-
-
-
-
-So, this is the range for the two calls :-
-
-                                 sum > L-1
-               |--------------------------------------------|
-
-                                                  sum > U
-                                             |--------------|
-
-___________________________________________________________
-|    |    |    |    |    |    |    |    |    |    |    |    | 
- -----------------------------------------------------------
-             ^    ^                        ^
-             |    |                        |
-            L-1   L                        U
-
-
-
-
-So, definitely, this will be the range for the elements that lie
-in the range Lower <= sum <= Upper :-
-
-                  sum > L-1
-               |--------------------------------------------|
-
-                                                  sum > U
-                                             |--------------|
-                       L <= sum <= U
-
-               |-----------------------------|
-
-___________________________________________________________
-|    |    |    |    |    |    |    |    |    |    |    |    | 
- -----------------------------------------------------------
-             ^    ^                        ^
-             |    |                        |
-            L-1   L                        U
-
-
-
-That's why we are decrementing the 'high' variable inside the while loop.
-And the reason we are having the line "result += (high - low);" is because
-if that is the first index of 'high' which satisfies the condition, then
-all the other indices between 'low' and 'high' will satisfy too.
-
-
-
-*/
